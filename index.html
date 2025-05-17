@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quote Generator</title>
+  <link rel="stylesheet" href="./daisybud_script/DaisybudScript_PERSONAL_USE_ONLY.otf">
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      background-color: rgb(240, 245, 220);
+
+    }
+body{
+display: flex;
+justify-content: center;
+align-items: center;
+}
+    h1 {
+      font-family: 'Daisybud Script PERSONAL USE';
+      text-align: center;
+    }
+
+    .box {
+      border: 2px dashed lightgray;
+      padding: 50px;  
+      margin-top: 15%;
+      box-shadow: 0px 7px 7px lightgray
+    }
+    .text ,.quoteDisplay,.authr{
+      font-style: italic;
+      padding: 10px;  
+font-size: large;
+word-wrap: break-word;
+    line-height: 25px;
+    }
+    .main{
+      background: transparent;
+      text-align: center;
+
+    }
+    button{
+      border: none;
+      border-radius: 10px;
+      margin: 10px;
+       background-color: rgb(186, 165, 96);
+      padding: 10px;  
+       width: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+      <h1>Quote Generator</h1>
+
+    <div class="main">
+      <div class="text">
+        <p id="quoteDisplay">The less of the World, the freer you live. <br><br>
+          Umar ibn Al-Khattāb (R.A)</p><br>
+        <div id="authr"></div>
+      </div>
+      <button onclick="getQuote()">New Quote</button>
+    </div>
+  </div>
+
+  <script>
+    async function getQuote() {
+      let res = await fetch("https://dummyjson.com/quotes");
+      let data = await res.json();
+
+      // Ensure both quote and author are from the same index
+      let randomIndex = Math.floor(Math.random() * data.quotes.length);
+      let selectedQuote = data.quotes[randomIndex];
+
+      document.getElementById("quoteDisplay").innerText = selectedQuote.quote;
+      document.getElementById("authr").innerText = selectedQuote.author;
+
+    }
+  </script>
+
+</body>
+
+</html>
